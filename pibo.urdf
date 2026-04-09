@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<robot name="pibo_10dof">
+
+  <material name="white"><color rgba="0.75 0.75 0.75 1"/></material>
+  <material name="cyan"><color rgba="0.0 0.7 0.9 1"/></material>
+  <material name="dark"><color rgba="0.2 0.2 0.2 1"/></material>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="torso.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="cyan"/>
+    </visual>
+  </link>
+
+  <!-- HEAD PAN (M4): 우측=음수  ±50° -->
+  <joint name="head_pan_joint" type="revolute">
+    <parent link="base_link"/><child link="head_pan_link"/>
+    <origin xyz="0 0 0.125"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-0.8727" upper="0.8727" effort="1.0" velocity="1.0"/>
+  </joint>
+  <link name="head_pan_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="neck_l.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <!-- HEAD TILT (M5): 위로=음수  ±25° -->
+  <joint name="head_tilt_joint" type="revolute">
+    <parent link="head_pan_link"/><child link="head_link"/>
+    <origin xyz="0 0 0.040"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.4363" upper="0.4363" effort="1.0" velocity="1.0"/>
+  </joint>
+  <link name="head_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="head.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="cyan"/>
+    </visual>
+  </link>
+
+  <!-- SHOULDER L (M8): 0=앞으로나란히  내리기=양수  ±80° -->
+  <joint name="shoulder_l_joint" type="revolute">
+    <parent link="base_link"/><child link="shoulder_l_link"/>
+    <origin xyz="0 0.065 0.085" rpy="0 -1.5708 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.3963" upper="1.3963" effort="1.0" velocity="1.0"/>
+  </joint>
+  <link name="shoulder_l_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="shoulder_l.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <!-- ELBOW L (M9): 바깥쪽=음수  ±30° -->
+  <joint name="elbow_l_joint" type="revolute">
+    <parent link="shoulder_l_link"/><child link="arm_l_link"/>
+    <origin xyz="0 0.050 -0.040"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="-0.5236" upper="0.5236" effort="1.0" velocity="1.0"/>
+  </joint>
+  <link name="arm_l_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="arm_l.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="cyan"/>
+    </visual>
+  </link>
+
+  <!-- SHOULDER R (M2): 0=앞으로나란히  내리기=음수  ±80° -->
+  <joint name="shoulder_r_joint" type="revolute">
+    <parent link="base_link"/><child link="shoulder_r_link"/>
+    <origin xyz="0 -0.065 0.085" rpy="0 -1.5708 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="-1.3963" upper="1.3963" effort="1.0" velocity="1.0"/>
+  </joint>
+  <link name="shoulder_r_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="shoulder_r.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <!-- ELBOW R (M3): 바깥쪽=양수  ±30° -->
+  <joint name="elbow_r_joint" type="revolute">
+    <parent link="shoulder_r_link"/><child link="arm_r_link"/>
+    <origin xyz="0 -0.050 -0.040"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="-0.5236" upper="0.5236" effort="1.0" velocity="1.0"/>
+  </joint>
+  <link name="arm_r_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="arm_r.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="cyan"/>
+    </visual>
+  </link>
+
+  <!-- HIP L (M7): 바깥쪽(좌)=음수  ±35° -->
+  <joint name="hip_l_joint" type="revolute">
+    <parent link="base_link"/><child link="leg_l_link"/>
+    <origin xyz="0 0.035 -0.005"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="-0.6109" upper="0.6109" effort="1.0" velocity="1.0"/>
+  </joint>
+  <link name="leg_l_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="leg_l.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <!-- ANKLE L (M6): 바깥쪽(좌)=음수  ±25° -->
+  <joint name="ankle_l_joint" type="revolute">
+    <parent link="leg_l_link"/><child link="foot_l_link"/>
+    <origin xyz="0 0 -0.110"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="-0.4363" upper="0.4363" effort="1.0" velocity="1.0"/>
+  </joint>
+  <link name="foot_l_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="foot_l.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="dark"/>
+    </visual>
+  </link>
+
+  <!-- HIP R (M1): 바깥쪽(우)=양수  ±35° -->
+  <joint name="hip_r_joint" type="revolute">
+    <parent link="base_link"/><child link="leg_r_link"/>
+    <origin xyz="0 -0.035 -0.005"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="-0.6109" upper="0.6109" effort="1.0" velocity="1.0"/>
+  </joint>
+  <link name="leg_r_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="leg_r.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <!-- ANKLE R (M0): 바깥쪽(우)=양수  ±25° -->
+  <joint name="ankle_r_joint" type="revolute">
+    <parent link="leg_r_link"/><child link="foot_r_link"/>
+    <origin xyz="0 0 -0.110"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="-0.4363" upper="0.4363" effort="1.0" velocity="1.0"/>
+  </joint>
+  <link name="foot_r_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="foot_r.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="dark"/>
+    </visual>
+  </link>
+
+</robot>
