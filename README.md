@@ -4,7 +4,7 @@
 
 A browser-based URDF robot simulator. No installation needed — just upload your URDF and STL files.
 
-**🔗 Live Demo → [leeyunjai82.github.io/unitree-g1-simulator](https://leeyunjai82.github.io/unitree-g1-simulator/)**
+**🔗 Live Demo → [leeyunjai82.github.io/unitree-g1-simulator](https://leeyunjai82.github.io/urdf-sim/)**
 
 ---
 
